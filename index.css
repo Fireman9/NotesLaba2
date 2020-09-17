@@ -1,0 +1,15 @@
+#leftSideDiv{
+    float: left;
+}
+
+#rightSideDiv{
+    margin-top: 40px;
+}
+
+#textArea{
+    margin-left: 30px;
+}
+
+#list{
+    list-style-type: none;
+}
