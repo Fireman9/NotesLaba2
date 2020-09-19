@@ -1,32 +1,89 @@
-#buttons{
-    margin-left: 40px;
+* {
+    margin: 0px;
+    padding: 0px;
 }
 
-#leftSideDiv{
-    float: left;
+#div {
+    display: flex;
 }
 
-#rightSideDiv{
-    margin-top: 20px;
+#h1Note {
+    font-family: Enriqueta, arial, serif;
+    line-height: 1.25;
+    margin-top: 30px;
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(38, 33, 33);
 }
 
-#textArea{
-    margin-left: 30px;
-    width: 600px;
-    height: 190px;
+#addBut {
+    background: url("https://image.flaticon.com/icons/png/512/61/6184= 8.png");
+    width: 50px;
+    height: 50px;
 }
 
-#list{
+#textArea {
+    width: 75%;
+    height: 80vh;
+    box-sizing: border-box;
+    background: rgb(51, 51, 51);
+    border: none;
+    resize: none;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 2px inset;
+    color: white;
+    font-family: "Helvetica Ne= ue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    text-align: left;
+    padding: 45px 65px;
+}
+
+#list {
     list-style-type: none;
     overflow: auto;
-    width: 200px;
-    height: 200px;
+    width: 25%;
+    height: 80vh;
+    background-color: rgb(38, 37, 37);
 }
 
-.selected{
-    background-color: grey;
+.selected {
+    background-color: rgb(202, 149, 33);
 }
 
-li{
+.selected:hover {
+    background-color: rgb(202, 149, 33);
+}
+
+li {
+    background-color: rgb(78, 78, 78);
     cursor: pointer;
+    height: 60px;
+    display: block;
+    font: 200 20px / 1.5 Helvetica, Verdana, sans-serif;
+    text-align: center;
+    border-bottom: 1px solid rgb(114, 114, 114);
+    color: white;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+li:hover {
+    background-color: rgb(67, 67, 67);
+}
+
+.container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: default;
+    font-size: 14px;
+    line-height: 21px;
+    font-family: "Segoe UI", Helvetica, Garuda, Arial, sans-serif;
+}
+
+body {
+    background-color: aliceblue;
 }

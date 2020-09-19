@@ -1,22 +1,24 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Notes</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" href="index.css"/>
 </head>
 <body>
-<h1>Notes</h1>
-<div id = buttons>
-    <button id = "addBut">Add</button>
-    <button id = "delBut">Delete</button>
+<div class="container">
+    <h1 id="h1Note">Notes</h1>
+    <div id="buttons">
+        <button id="addBut"></button>
+        <button id="delBut">Delete</button>
+    </div>
+    <div id="div">
+        <ul id="list"></ul>
+        <textarea id="textArea" readonly=""></textarea>
+    </div>
 </div>
-<div id = "leftSideDiv">
-    <ul id = "list"></ul>
-</div>
-<div id = "rightSideDiv">
-    <textarea id = "textArea" readonly></textarea>
-</div>
+
+<script src="index.js"></script>
 </body>
-<script src = "index.js"></script>
 </html>
