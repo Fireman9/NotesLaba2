@@ -22,3 +22,11 @@
     width: 200px;
     height: 200px;
 }
+
+.selected{
+    background-color: grey;
+}
+
+li{
+    cursor: pointer;
+}
