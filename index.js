@@ -3,7 +3,33 @@ const delBut = document.getElementById("delBut");
 const list = document.getElementById("list");
 const textArea = document.getElementById("textArea");
 
-let notesArray = new Array();
+let notesArray;
+if (localStorage.getItem('notesArray')) {
+    notesArray = JSON.parse(localStorage.getItem('notesArray'));
+    for(i in notesArray){
+        let newLi = document.createElement('li');
+        newLi.id = notesArray[i].id;
+        if(notesArray[i].text.length > 0) {
+            newLi.innerHTML = notesArray[i].text.slice(0, 15);
+            let temp = newLi.innerHTML.split('\n');
+            if (temp.length > 1) {
+                newLi.innerHTML = temp[0];
+            } else {
+                newLi.innerHTML = temp[0] + "...";
+            }
+        }
+        else{
+            newLi.innerHTML = 'New note';
+        }
+        list.append(newLi);
+    }
+} else {
+    notesArray = new Array();
+}
+
+window.addEventListener("beforeunload", function (event) {
+    localStorage.setItem('notesArray', JSON.stringify(notesArray));
+})
 
 addBut.onclick = function() {
     let newLi = document.createElement('li');
