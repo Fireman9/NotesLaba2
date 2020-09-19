@@ -2,7 +2,7 @@ const addBut = document.getElementById("addBut");
 const delBut = document.getElementById("delBut");
 const list = document.getElementById("list");
 
-function addNewNote() {
+addBut.onclick = function() {
     let newLi = document.createElement('li');
     let date = new Date();
     newLi.id = String(date.getTime());
@@ -10,9 +10,7 @@ function addNewNote() {
     list.append(newLi);
 }
 
-addBut.addEventListener("click", addNewNote);
-
-list.onclick = function (event){
+list.onclick = function (event) {
     if(event.target.tagName != "LI") return;
     let li = event.target;
     let selected = list.querySelectorAll('.selected');
@@ -20,4 +18,11 @@ list.onclick = function (event){
         elem.classList.remove('selected');
     }
     li.classList.add('selected');
+}
+
+delBut.onclick = function () {
+    let selected = list.querySelectorAll('.selected');
+    for(let elem of selected){
+        elem.parentNode.removeChild(elem);
+    }
 }
