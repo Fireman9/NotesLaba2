@@ -112,6 +112,7 @@ list.onclick = function (event) {
 delBut.onclick = function () {
     let selected = list.querySelectorAll('.selected');
     if (selected.length == 0) {
+        if (document.getElementById("notSelected")) return;
         let notSelectedAlert = document.createElement('div');
         notSelectedAlert.id = "notSelected";
         notSelectedAlert.innerHTML = "Nothing selected";
