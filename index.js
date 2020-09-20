@@ -18,8 +18,8 @@ function getTimeFromId(id) {
     if (minutes.length < 2) minutes = "0" + minutes;
     let seconds = String(time.getSeconds());
     if (seconds.length < 2) seconds = "0" + seconds;
-    return "<br>" + year + "." + month + "." +
-        date + " " + hours + ":" + minutes + ":" + seconds;
+    return "<br>" + hours + ":" + minutes + ":" + seconds + " " + date + " " +
+        time.toLocaleString('en', {month: 'long'}) + " " + year;
 }
 
 if (localStorage.getItem('notesArray')) {
