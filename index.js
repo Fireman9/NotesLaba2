@@ -47,12 +47,14 @@ if (localStorage.getItem('notesArray')) {
 
 function selectOnUrlChange(id) {
     if (id == "") return;
+    let is = false;
     for (let i in notesArray) {
         if (notesArray[i].id == id) {
+            is = true;
             document.getElementById("textArea").value = notesArray[i].text;
         }
     }
-    if(document.getElementById("textArea").value == ""){
+    if (!is) {
         window.location.href = window.location.href.replace(window.location.hash, '');
     }
     let selected = list.querySelectorAll('.selected');
