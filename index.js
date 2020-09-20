@@ -84,11 +84,6 @@ window.onhashchange = function () {
     textArea.focus();
 }
 
-window.addEventListener('hashchange', function () {
-    console.log('The hash has changed!');
-    console.log(window.location.hash.slice(1));
-});
-
 window.addEventListener("beforeunload", function (event) {
     localStorage.setItem('notesArray', JSON.stringify(notesArray));
 })
