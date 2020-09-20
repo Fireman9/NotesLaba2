@@ -5,6 +5,23 @@ const textArea = document.getElementById("textArea");
 
 let notesArray;
 
+function getTimeFromId(id) {
+    let time = new Date(parseInt(id));
+    let year = String(time.getFullYear());
+    let month = String(time.getMonth() + 1);
+    if (month.length < 2) month = "0" + month;
+    let date = String(time.getDate());
+    if (date.length < 2) date = "0" + date;
+    let hours = String(time.getHours());
+    if (hours.length < 2) hours = "0" + hours;
+    let minutes = String(time.getMinutes());
+    if (minutes.length < 2) minutes = "0" + minutes;
+    let seconds = String(time.getSeconds());
+    if (seconds.length < 2) seconds = "0" + seconds;
+    return "<br>" + year + "." + month + "." +
+        date + " " + hours + ":" + minutes + ":" + seconds;
+}
+
 if (localStorage.getItem('notesArray')) {
     notesArray = JSON.parse(localStorage.getItem('notesArray'));
     for (i in notesArray) {
@@ -21,20 +38,7 @@ if (localStorage.getItem('notesArray')) {
         } else {
             newLi.innerHTML = 'New note';
         }
-        let time = new Date(parseInt(newLi.id));
-        let year = String(time.getFullYear());
-        let month = String(time.getMonth() + 1);
-        if (month.length < 2) month = "0" + month;
-        let date = String(time.getDate());
-        if (date.length < 2) date = "0" + date;
-        let hours = String(time.getHours());
-        if (hours.length < 2) hours = "0" + hours;
-        let minutes = String(time.getMinutes());
-        if (minutes.length < 2) minutes = "0" + minutes;
-        let seconds = String(time.getSeconds());
-        if (seconds.length < 2) seconds = "0" + seconds;
-        newLi.innerHTML += "<br>" + year + "." + month + "." +
-            date + " " + hours + ":" + minutes + ":" + seconds;
+        newLi.innerHTML += getTimeFromId(newLi.id);
         list.append(newLi);
     }
 } else {
@@ -50,23 +54,10 @@ addBut.onclick = function () {
     let date = new Date();
     newLi.id = String(date.getTime());
     let note = {id: newLi.id, text: ""};
-    notesArray.push(note);
+    notesArray.unshift(note);
     newLi.innerHTML = 'New note';
-    let time = new Date(parseInt(newLi.id));
-    let year = String(time.getFullYear());
-    let month = String(time.getMonth() + 1);
-    if (month.length < 2) month = "0" + month;
-    let day = String(time.getDate());
-    if (day.length < 2) day = "0" + day;
-    let hours = String(time.getHours());
-    if (hours.length < 2) hours = "0" + hours;
-    let minutes = String(time.getMinutes());
-    if (minutes.length < 2) minutes = "0" + minutes;
-    let seconds = String(time.getSeconds());
-    if (seconds.length < 2) seconds = "0" + seconds;
-    newLi.innerHTML += "<br>" + year + "." + month + "." +
-        day + " " + hours + ":" + minutes + ":" + seconds;
-    list.append(newLi);
+    newLi.innerHTML += getTimeFromId(newLi.id);
+    list.prepend(newLi);
 }
 
 list.onclick = function (event) {
@@ -114,8 +105,8 @@ textArea.oninput = function () {
     selected[0].textContent = textArea.value.slice(0, 15);
     let temp = selected[0].textContent.split('\n');
     if (temp.length > 1) {
-        selected[0].textContent = temp[0];
+        selected[0].innerHTML = temp[0] + getTimeFromId(selected[0].id);
     } else {
-        selected[0].textContent = temp[0] + "...";
+        selected[0].innerHTML = temp[0] + "..." + getTimeFromId(selected[0].id);
     }
 }
