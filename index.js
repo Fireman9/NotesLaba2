@@ -45,6 +45,45 @@ if (localStorage.getItem('notesArray')) {
     notesArray = new Array();
 }
 
+function selectOnUrlChange(id) {
+    if (id == "") return;
+    for (let i in notesArray) {
+        if (notesArray[i].id == id) {
+            document.getElementById("textArea").value = notesArray[i].text;
+        }
+    }
+    let selected = list.querySelectorAll('.selected');
+    for (let elem of selected) {
+        elem.classList.remove('selected');
+    }
+    document.getElementById(id).classList.add('selected');
+    textArea.readOnly = false;
+    textArea.focus();
+    window.location.href = window.location.href.replace(window.location.hash, '') + "#" + id;
+}
+
+window.addEventListener("load", selectOnUrlChange(window.location.hash.slice(1)));
+
+window.onhashchange = function () {
+    for (let i in notesArray) {
+        if (notesArray[i].id == window.location.hash.slice(1)) {
+            document.getElementById("textArea").value = notesArray[i].text;
+        }
+    }
+    let selected = list.querySelectorAll('.selected');
+    for (let elem of selected) {
+        elem.classList.remove('selected');
+    }
+    document.getElementById(window.location.hash.slice(1)).classList.add('selected');
+    textArea.readOnly = false;
+    textArea.focus();
+}
+
+window.addEventListener('hashchange', function () {
+    console.log('The hash has changed!');
+    console.log(window.location.hash.slice(1));
+});
+
 window.addEventListener("beforeunload", function (event) {
     localStorage.setItem('notesArray', JSON.stringify(notesArray));
 })
@@ -62,26 +101,20 @@ addBut.onclick = function () {
 
 list.onclick = function (event) {
     if (event.target.tagName != "LI") return;
-    let li = event.target;
-    for (let i in notesArray) {
-        if (notesArray[i].id == li.id) {
-            document.getElementById("textArea").value = notesArray[i].text;
-        }
-    }
-    let selected = list.querySelectorAll('.selected');
-    for (let elem of selected) {
-        elem.classList.remove('selected');
-    }
-    li.classList.add('selected');
-    textArea.readOnly = false;
-    textArea.focus();
+    selectOnUrlChange(event.target.id);
 }
 
 delBut.onclick = function () {
     let selected = list.querySelectorAll('.selected');
     if (selected.length == 0) {
-        alert("Nothing selected");
-        // TODO: alert change
+        let notSelectedAlert = document.createElement('div');
+        notSelectedAlert.id = "notSelected";
+        notSelectedAlert.innerHTML = "Nothing selected";
+        buttons.append(notSelectedAlert);
+        setTimeout(function () {
+            notSelectedAlert.parentNode.removeChild(notSelectedAlert);
+        }, 3000);
+        return;
     }
     textArea.value = "";
     textArea.readOnly = true;
@@ -93,6 +126,7 @@ delBut.onclick = function () {
     for (let elem of selected) {
         elem.parentNode.removeChild(elem);
     }
+    window.location.href = window.location.href.replace(window.location.hash, '');
 }
 
 textArea.oninput = function () {
@@ -103,7 +137,7 @@ textArea.oninput = function () {
         }
     }
     selected[0].textContent = textArea.value.slice(0, 15);
-    if(textArea.value.length == 0){
+    if (textArea.value.length == 0) {
         selected[0].innerHTML = "New note" + getTimeFromId(selected[0].id);
         return;
     }
