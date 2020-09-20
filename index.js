@@ -52,6 +52,9 @@ function selectOnUrlChange(id) {
             document.getElementById("textArea").value = notesArray[i].text;
         }
     }
+    if(document.getElementById("textArea").value == ""){
+        window.location.href = window.location.href.replace(window.location.hash, '');
+    }
     let selected = list.querySelectorAll('.selected');
     for (let elem of selected) {
         elem.classList.remove('selected');
