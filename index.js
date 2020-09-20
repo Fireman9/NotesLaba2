@@ -103,6 +103,10 @@ textArea.oninput = function () {
         }
     }
     selected[0].textContent = textArea.value.slice(0, 15);
+    if(textArea.value.length == 0){
+        selected[0].innerHTML = "New note" + getTimeFromId(selected[0].id);
+        return;
+    }
     let temp = selected[0].textContent.split('\n');
     if (temp.length > 1) {
         selected[0].innerHTML = temp[0] + getTimeFromId(selected[0].id);
